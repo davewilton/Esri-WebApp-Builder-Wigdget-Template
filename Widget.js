@@ -53,6 +53,11 @@ define([
               this.inherited(arguments);
           },
 
+          resize: function(evt){
+            
+          },
+
+
           destroy: function () {
               try {
                   //clean up!
