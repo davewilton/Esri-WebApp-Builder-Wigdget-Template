@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Widget Test Page</title>
+
+    <!-- META TAGS -->
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//js.arcgis.com/3.11/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.11/esri/css/esri.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.11/dgrid/css/dgrid.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/dojo/dojo/resources/dojo.css">
+    <link href="../../../../jimu.js/css/jimu.css" rel="stylesheet" />
+    <link href="../../../../jimu.js/css/dojo-override.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+    <style type='text/css'>
+        .dgrid-cell {
+            width: 400px !important;
+        }
+
+        .dgrid {
+            width: 100% !important;
+        }
+    </style>
+
+    <style type='text/css'>
+        body {
+            padding: 50px;
+        }
+    </style>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        var path = window.location.protocol + '//' + window.location.hostname + '/' + window.location.pathname.split('/')[1] + '/';
+
+        dojoConfig = {
+
+            parseOnLoad: false,
+            async: true,
+            tlmSiblingOfDojo: false,
+
+
+            has: {
+                'extend-esri': 1,
+                "mvc-bindings-log-api": 0,
+            },
+            packages: [{
+                name: "widgets",
+                location: path + "widgets"
+            }, {
+                name: "jimu",
+                location: path + "jimu.js"
+            }, {
+                name: "themes",
+                location: path + "themes"
+            }]
+        };
+
+
+    </script>
+
+    <script src="//js.arcgis.com/3.11/"></script>
+    <script type="text/javascript">
+        require([
+            "esri/urlUtils",
+             "esri/config"
+        ], function (urlUtils, config) {
+            //urlUtils.addProxyRule({
+            //    urlPrefix: "x.x.local",
+            //    proxyUrl: path + "/proxy.ashx"
+           // });
+        });
+    </script>
+    <script type="text/javascript">
+
+        var widgetUnderTest;
+
+        require([
+            'widgets/wabTemplate/tests/spec/helpers/maphelper',
+            'widgets/wabTemplate/Widget',
+            'dojo/domReady!'
+        ], function (maphelper, Module) {
+
+            var createMap = true;
+
+            var actionCallback = function (evt) {
+                var map = evt;
+                widgetUnderTest = new Module({
+                    map: map
+                }, 'node');
+                widgetUnderTest.startup();
+            };
+            if (createMap) {
+                var helper = new maphelper();
+                helper.createTestMap('map', actionCallback);
+            } else {
+                actionCallback();
+            }
+
+
+        });
+    </script>
+</head>
+<body class='claro'>
+    <div style="width: 800px; height: 400px; display: inline-block; float: left; margin: 1em">
+        <div id="node"></div>
+    </div>
+
+</body>
+</html>

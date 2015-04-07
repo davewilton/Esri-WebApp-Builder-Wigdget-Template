@@ -1,0 +1,8 @@
+.wab-widget-wabTemplate {
+
+}
+
+.wab-widget-wabTemplate .templateWidget {
+      border: black solid thin;
+      min-height: 28em;
+}

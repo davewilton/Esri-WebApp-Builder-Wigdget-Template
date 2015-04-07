@@ -1,0 +1,13 @@
+{
+  "name": "wabTemplate",
+  "type": "widget",
+  "platform": "HTML",
+  "version": "1.0",
+  "author": "Exprodat Consulting Ltd",
+  "description": "Widget used as stub",
+  "copyright": "Exprodat Consulting Ltd 2014",
+  "properties": {
+    "inPanel": true,
+    "hasConfig": true
+  }
+}
