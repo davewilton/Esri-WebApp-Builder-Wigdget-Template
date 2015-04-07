@@ -1,6 +1,7 @@
 ﻿define({
     root: {
         instruction: 'eclTemplate Settings',
-        urlsTitle: "eclTemplate urls"
+        urlsTitle: "eclTemplate urls",
+        AnotherSettingTitle: 'Another Setting'
     }
 });

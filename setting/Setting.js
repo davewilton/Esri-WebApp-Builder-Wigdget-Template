@@ -10,14 +10,15 @@ define([
     'dijit/_WidgetsInTemplateMixin',
     'jimu/BaseWidgetSetting',
 
-    'jimu/dijit/SimpleTable'
+    'jimu/dijit/SimpleTable',
+    "dijit/form/TextBox"
 
 ],
   function (
     declare, lang,
     domConstruct,
     widgetsInTemplateMixin, BaseWidgetSetting,
-    Table
+    Table, TextBox
     ) {
       return declare([BaseWidgetSetting, widgetsInTemplateMixin], {
           //these two properties is defined in the BaseWidget
@@ -39,13 +40,17 @@ define([
               for (var prop in this.config) {
                   var configItem = this.config[prop];
                   this.addTitle(prop);
-                  switch (configItem.type.toLowerCase()) {
-                      case 'table':
-                          //see the app config widget for an example of how to use this
-                          this.createTable(configItem);
-                          break;
-                      default:
-                          //simple text box with label needs to be added
+                  if (configItem.type) {
+                      switch (configItem.type.toLowerCase()) {
+                          case 'table':
+                              //see the app config widget for an example of how to use this
+                              this.createTable(configItem);
+                              break;
+                          case 'text':
+                              this.createTextbox(configItem);
+                          default:
+                              //simple text box with label needs to be added
+                      }
                   }
 
               }
@@ -55,7 +60,6 @@ define([
               var title = this.nls[name + 'Title'];
               if (!title) return;
               domConstruct.create('h2', { innerHTML: title }, this.settingsContainer);
-
           },
 
           createTable: function (configItem) {
@@ -99,6 +103,14 @@ define([
 
           },
 
+          createTextbox: function(configItem) {
+              var myTextBox = new TextBox({
+                  name: configItem.id,
+                  value: configItem.value,
+              });
+           
+              myTextBox.placeAt(this.settingsContainer);
+          },
 
           setConfig: function (config) {
               //any checks on the config?
@@ -127,13 +139,14 @@ define([
               for (var prop in this.config) {
                   var configItem = this.config[prop];
                   newConfig[prop] = configItem;
-                  switch (configItem.type.toLowerCase()) {
-                      case 'table':
-                          newConfig[prop].values = this['table' + configItem.type.toLowerCase()].getData();
-                          break;
-                      default:
+                  if (configItem.type) {
+                      switch (configItem.type.toLowerCase()) {
+                          case 'table':
+                              newConfig[prop].values = this['table' + configItem.type.toLowerCase()].getData();
+                              break;
+                          default:
+                      }
                   }
-
               }
               this.setConfig(newConfig);
 

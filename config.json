@@ -1,4 +1,18 @@
 ﻿{
-    "userOptions": "here"
+    "userOptions": "here",
+    "urls": {
+        "type": "table",
+        "values": [
+            {
+                "name": "Service Url",
+                "value": "localhost",
+                "id": "myService"
+            }
+        ]
+    },
+    "AnotherSetting": {
+        "type": "text",
+        "value": "default value"
+    }
 
 }

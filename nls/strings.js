@@ -1,7 +1,7 @@
-define({
-    root: ({
-        _widgetLabel: "wabTemplate",
-        dialogueTitle: 'wabTemplate',
-        title: "wabTemplate",
-  })
+﻿define({
+    root: {
+        instruction: 'eclTemplate Settings',
+        urlsTitle: "eclTemplate urls",
+        AnotherSettingTitle: 'Another Setting'
+    }
 });
